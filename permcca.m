@@ -144,8 +144,12 @@ for p = 1:nP
             idxY = (1:Ny);
             idxX = (1:Nx);
         else
+            %%% we're going to alte this script for ablatoin anlaysis 
+            %%% only permute Y so we can ocmpare the ablations on
+            %%% bootstrapped data 
             idxY = randperm(Ny);
-            idxX = randperm(Nx);
+            % idxX = randperm(Nx);
+            idxX = (1:Nx);
         end
     else
         fprintf('the pset is active')
