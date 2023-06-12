@@ -55,6 +55,7 @@ X = varargin{2};
 if nargin >= 3
     nP = varargin{3};
 end
+%%switching the  order up so that pset comes earlier
 if nargin >= 4
     Z = varargin{4};
 else
@@ -76,6 +77,7 @@ else
     partial = true;
 end
 if nargin >= 8
+    fprintf('we are using an exchangeability block')
     Pset = varargin{8};
 else
     Pset = false;
@@ -136,6 +138,7 @@ for p = 1:nP
     % Otherwise, use the permtuation set to shuffle
     % one side only.
     if islogical(Pset)
+        
         % First permutation is no permutation
         if p == 1
             idxY = (1:Ny);
@@ -145,6 +148,7 @@ for p = 1:nP
             idxX = randperm(Nx);
         end
     else
+        fprintf('the pset is active')
         idxY = Pset(:,p);
         idxX = (1:Nx);
     end
@@ -161,7 +165,7 @@ for p = 1:nP
     cnt = cnt + (lW >= lW1);
     fprintf('\n');
 end
-punc  = cnt/nP;
+punc  = double(cnt)/double(nP);
 varargout{1} = cummax(punc); % pfwer
 varargout{2} = r;            % canonical correlations
 varargout{3} = A;            % canonical weights (left)
